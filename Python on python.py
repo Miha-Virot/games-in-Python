@@ -33,15 +33,6 @@ while boel == 1:
     if keyboard.is_pressed(esc):
         boel=2
 
-"""    if keyboard.is_pressed(up):
-        vektor=1 #вверх
-    elif keyboard.is_pressed(down):
-        vektor=2 #вниз                  
-    elif keyboard.is_pressed(left):
-        vektor=3 #влево
-    elif keyboard.is_pressed(right):
-        vektor=4 #вправо"""
-
     if x1 < x:
         vektor=1 #вверх
     elif x1 > x:
@@ -50,7 +41,6 @@ while boel == 1:
         vektor=3 #влево
     elif y1 > y:
         vektor=4 #вправо
-
 
     if vektor==1:
         x -=1
@@ -102,3 +92,14 @@ while boel == 1:
 
      
 print("GAME OVER", x, y, size - 1)
+
+
+
+"""    if keyboard.is_pressed(up):
+        vektor=1 #вверх
+    elif keyboard.is_pressed(down):
+        vektor=2 #вниз                  
+    elif keyboard.is_pressed(left):
+        vektor=3 #влево
+    elif keyboard.is_pressed(right):
+        vektor=4 #вправо"""
