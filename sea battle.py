@@ -19,8 +19,10 @@ def pole():
     for i in range(8):
         print(i+1, end=" ")
         for j in range(8):
-            if YP[j][i] != 0:
+            if YP[j][i] == 1:
                 print("@", end=" ")
+            elif YP[j][i] == 2:
+                print("#", end=" ")
             else:
                 print("~", end=" ")
         print(sep=" ")
@@ -32,6 +34,8 @@ def pole():
         for j in range(8):
             if NP[j][i] != 0:
                 print("@", end=" ")
+            elif NP[j][i] == 2:
+                print("#", end=" ")
             else:
                 print("~", end=" ")
         print(sep=" ")
