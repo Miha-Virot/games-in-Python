@@ -30,9 +30,6 @@ while boel == 1:
 
     os.system('cls')
 
-    if keyboard.is_pressed(esc):
-        boel=2
-
     if x1 < x:
         vektor=1 #вверх
     elif x1 > x:
@@ -95,7 +92,10 @@ print("GAME OVER", x, y, size - 1)
 
 
 
-"""    if keyboard.is_pressed(up):
+"""
+    if keyboard.is_pressed(esc):
+        boel=2
+    if keyboard.is_pressed(up):
         vektor=1 #вверх
     elif keyboard.is_pressed(down):
         vektor=2 #вниз                  
