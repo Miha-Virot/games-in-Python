@@ -1,9 +1,40 @@
-import paramiko, numpy as np, os
+import numpy as np, os, platform, threading, socket
+import datetime
 
-host = '192.168.0.2'
-user = 'login'
-secret = 'password'
-port = 60666
+def getMyIp():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) #Создаем сокет (UDP)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1) # Настраиваем сокет на BROADCAST вещание.
+    s.connect(('<broadcast>', 0))
+    return s.getsockname()[0]
+
+net = getMyIp()
+net_split = net.split('.')
+a = '.'
+net = net_split[0] + a + net_split[1] + a + net_split[2] + a
+start_point = 1
+end_point = 255
+
+oс = platform.system()
+if (oс == "Windows"):
+    ping_com = "ping -n 1 "
+else:
+    ping_com = "ping -c 1 "
+
+def scan_Ip(ip):
+    addr = net + str(ip)
+    comm = ping_com + addr
+    response = os.popen(comm)
+    data = response.readlines()
+    for line in data:
+        if 'TTL' in line:
+            print(addr, "--> Ping Ok")
+            break
+
+for ip in range(start_point, end_point):
+    if ip == int(net_split[3]):
+       continue
+    potoc = threading.Thread(target=scan_Ip, args=[ip])
+    potoc.start()
 
 n=int(8)
 stroka=''
@@ -55,7 +86,7 @@ p1=0
 p2=0
 p3=0
 p4=0
-e = 0
+e =0
 
 def shlup():
     global e, p1, p2, p3, p4
