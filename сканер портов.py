@@ -11,7 +11,7 @@ def scan_port(ip,port):
     except:
         pass
 
-ip = '192.168.43.1'
+ip = '192.168.0.124'
 for i in range(1000):
     scan_port(ip,i)
 
