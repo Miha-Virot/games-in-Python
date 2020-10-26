@@ -27,7 +27,7 @@ def scan_Ip(ip):
     data = response.readlines()
     for line in data:
         if 'TTL' in line:
-            print(addr, "--> Ping Ok")
+            print(addr)
             break
 
 for ip in range(start_point, end_point):
@@ -36,6 +36,8 @@ for ip in range(start_point, end_point):
     potoc = threading.Thread(target=scan_Ip, args=[ip])
     potoc.start()
 
+# выше код для сети
+"""
 n=int(8)
 stroka=''
 n=8
@@ -187,3 +189,4 @@ pole()
 while shlup()==0:
     n=n
 
+"""
