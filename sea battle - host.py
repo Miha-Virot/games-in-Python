@@ -44,7 +44,7 @@ potoc.join()
 
 os.system("clear")
 
-conn=socket.socket()
+sock=socket.socket()
 sock.bind( ("", 14900) )
 sock.listen(10)
 conn, addr = sock.accept() # старая строка получения сокета
