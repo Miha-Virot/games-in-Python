@@ -11,17 +11,20 @@ def getMyIp():
     return s.getsockname()[0]
 
 def scan_Ip(ip):
+    global addres
     addr = net + str(ip)
     comm = ping_com + addr
     response = os.popen(comm)
     data = response.readlines()
     for line in data:
         if 'TTL' in line or 'ttl' in line:
-            print(addr, "--> Ping Ok")
+            print(addr)
+            addres=addr
+            return addres
             break
 
+addres=''
 net = getMyIp()
-print('You IP :',net)
 net_split = net.split('.')
 a = '.'
 net = net_split[0] + a + net_split[1] + a + net_split[2] + a
@@ -34,9 +37,6 @@ if (oс == "Windows"):
 else:
     ping_com = "ping -c 1 "
 
-t1 = datetime.now()
-print("Scanning in Progress:")
-
 for ip in range(start_point, end_point):
     if ip == int(net_split[3]):
        continue
@@ -44,7 +44,5 @@ for ip in range(start_point, end_point):
     potoc.start()
 
 potoc.join()
-t2 = datetime.now()
-total = t2 - t1
 
-print("Scanning completed in: ", total)
+return net, addres

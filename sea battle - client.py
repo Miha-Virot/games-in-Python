@@ -7,12 +7,27 @@ def getMyIp():
     s.connect(('<broadcast>', 0))
     return s.getsockname()[0]
 
+def scan_Ip(ip):
+    global addres
+    addr = net + str(ip)
+    comm = ping_com + addr
+    response = os.popen(comm)
+    data = response.readlines()
+    for line in data:
+        if 'TTL' in line or 'ttl' in line:
+            print(addr)
+            addres=addr
+            return addres
+            break
+
+addres=''
 net = getMyIp()
+IP=getMyIp()
 net_split = net.split('.')
 a = '.'
 net = net_split[0] + a + net_split[1] + a + net_split[2] + a
-start_point = 1
-end_point = 255
+start_point = 0
+end_point = 256
 
 oс = platform.system()
 if (oс == "Windows"):
@@ -20,21 +35,26 @@ if (oс == "Windows"):
 else:
     ping_com = "ping -c 1 "
 
-def scan_Ip(ip):
-    addr = net + str(ip)
-    comm = ping_com + addr
-    response = os.popen(comm)
-    data = response.readlines()
-    for line in data:
-        if 'TTL' in line:
-            print(addr)
-            break
-
 for ip in range(start_point, end_point):
     if ip == int(net_split[3]):
        continue
     potoc = threading.Thread(target=scan_Ip, args=[ip])
     potoc.start()
+potoc.join()
+
+os.system("clear")
+
+conn = socket.socket()
+conn.connect( (addres, 14900) )
+conn.send(b"Hello! \n")
+data = b""
+tmp = conn.recv(1024)
+while tmp:
+    data += tmp
+    tmp = conn.recv(1024)
+print( data.decode("utf-8") )
+conn.close()
+
 
 # выше код для сети
 """
@@ -49,7 +69,7 @@ chm=[["A", "B", "C", "D", "E", "F", "G", "H"],[1, 2, 3, 4, 5, 6, 7, 8]]
 
 
 def pole():
-    os.system("cls")
+    os.system("clear")
     print("ТВАЯ ХАТА")
     print("# A B C D E F G H")
     for i in range(8):
